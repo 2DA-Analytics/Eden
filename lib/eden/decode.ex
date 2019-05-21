@@ -34,11 +34,11 @@ defmodule Eden.Decode do
     String.to_atom(value)
   end
   def decode(%Node{type: :integer, value: value}, _opts) do
-    value = String.trim_trailing(value.to_string, ?N)
+    value = String.trim_trailing(Integer.to_string(value), ?N)
     :erlang.binary_to_integer(value)
   end
   def decode(%Node{type: :float, value: value}, _opts) do
-    value = String.trim_trailing(value.to_string, ?M)
+    value = String.trim_trailing(Float.to_string(value), ?M)
     # Elixir/Erlang don't convert to float if there
     # is no decimal part.
     final_value = if not String.contains?(value, ".") do
