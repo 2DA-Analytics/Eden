@@ -49,11 +49,6 @@ defmodule EdenTest do
     assert decode!("(1 :a 42.0)") == [1, :a, 42.0]
   end
 
-  test "Decode Vector" do
-    array = Array.from_list([1, :a, 42.0])
-    assert decode!("[1 :a 42.0]") == array
-  end
-
   test "Decode Map" do
     map = %{name: "John", age: 42}
     assert decode!("{:name \"John\" :age 42}") == map
@@ -105,11 +100,6 @@ defmodule EdenTest do
 
   test "Encode List" do
     assert encode!([1, :a, 42.0]) == "(1, :a, 42.0)"
-  end
-
-  test "Encode Vector" do
-    array = Array.from_list([1, :a, 42.0])
-    assert encode!(array) == "[1, :a, 42.0]"
   end
 
   test "Encode Map" do
