@@ -34,8 +34,7 @@ defmodule Eden.Decode do
     String.to_atom(value)
   end
   def decode(%Node{type: :integer, value: value}, _opts) do
-    value = String.trim_trailing(Integer.to_string(value), ?N)
-    :erlang.binary_to_integer(value)
+    String.to_integer(String.trim_trailing(Integer.to_string(value), ?N))
   end
   def decode(%Node{type: :float, value: value}, _opts) do
     value = String.trim_trailing(Float.to_string(value), ?M)
@@ -50,7 +49,7 @@ defmodule Eden.Decode do
     else
       value
     end
-    :erlang.binary_to_float(final_value)
+    String.to_float(final_value)
   end
   def decode(%Node{type: :list, children: children}, opts) do
     decode(children, opts)
