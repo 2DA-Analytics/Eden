@@ -4,6 +4,7 @@ alias Eden.Character
 alias Eden.Symbol
 alias Eden.UUID
 alias Eden.Tag
+alias Eden.Array
 
 defprotocol Eden.Encode do
   @fallback_to_any true

@@ -3,6 +3,7 @@ defmodule Eden.Decode do
   alias Eden.Character
   alias Eden.Symbol
   alias Eden.Tag
+  alias Eden.Array
   alias Eden.Exception, as: Ex
   require Integer
 
