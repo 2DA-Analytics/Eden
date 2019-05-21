@@ -119,7 +119,7 @@ defmodule Eden do
   """
   @spec decode!(String.t, Keyword.t) :: any
   def decode!(input, opts \\ []) do
-    tree = parse(input, location: true)
+    tree = parse(input, [location: true])
     handlers = Map.merge(@default_handlers, opts[:handlers] || %{})
     opts = [handlers: handlers]
     case Decode.decode(tree, opts) do
