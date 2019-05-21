@@ -3,7 +3,6 @@ defmodule Eden.Decode do
   alias Eden.Character
   alias Eden.Symbol
   alias Eden.Tag
-  alias Eden.Array
   alias Eden.Exception, as: Ex
   require Integer
 
@@ -59,7 +58,7 @@ defmodule Eden.Decode do
   def decode(%Node{type: :vector, children: children}, opts) do
     children
     |> decode(opts)
-    |> Array.from_list
+    |> Tensor.Vector.from_list
   end
   def decode(%Node{type: :map, children: children} = node, opts) do
     if Integer.is_odd(length children) do

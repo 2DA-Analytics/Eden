@@ -34,7 +34,7 @@ defmodule Eden do
 
   - `Eden.Symbol`
   - `Eden.Character`
-  - `Array` (vector)
+  - `Tensor.Vector` (vector)
   - `Eden.Tag` (tagged value)
 
   Since the *edn* specification requires every implementation to
@@ -94,10 +94,10 @@ defmodule Eden do
       {:ok, [%Eden.Symbol{name: "hello"}, :world, %Eden.Character{char: "!"}]
 
       iex> Eden.decode("[1 2 3 4]")
-      {:ok, #Array<[1, 2, 3, 4], fixed=false, default=nil>}
+      {:ok, #Vector(4)<[1, 2, 3, 4], fixed=false, default=nil>}
 
       iex> Eden.decode("nil true false")
-      {:ok, #Array<[1, 2, 3, 4], fixed=false, default=nil>}
+      {:ok, #Vector(4)<[1, 2, 3, 4], fixed=false, default=nil>}
 
       iex> Eden.decode("nil true false .")
       {:error, Eden.Exception.UnexpectedInputError}

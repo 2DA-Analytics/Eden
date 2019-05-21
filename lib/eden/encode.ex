@@ -4,7 +4,6 @@ alias Eden.Character
 alias Eden.Symbol
 alias Eden.UUID
 alias Eden.Tag
-alias Eden.Array
 
 defprotocol Eden.Encode do
   @fallback_to_any true
@@ -57,10 +56,10 @@ defimpl Encode, for: List do
   end
 end
 
-defimpl Encode, for: Array do
-  def encode(array) do
-    array
-    |> Array.to_list
+defimpl Encode, for: Tensor.Vector do
+  def encode(vector) do
+    vector
+    |> Tensor.Vector.to_list
     |> Enum.map(&Encode.encode/1)
     |> Enum.join(", ")
     |> Utils.wrap("[", "]")

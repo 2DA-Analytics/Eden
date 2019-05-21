@@ -20,7 +20,8 @@ defmodule Eden.Mixfile do
     [{:timex, "~> 3.1"},
      {:exreloader, github: "jfacorro/exreloader", tag: "master", only: :dev},
      {:ex_doc, "~> 0.7", only: :dev},
-     {:earmark, ">= 0.0.0", only: :dev}]
+     {:earmark, ">= 0.0.0", only: :dev},
+     {:tensor, "~> 2.0"}]
   end
 
   defp description do
