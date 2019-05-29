@@ -164,6 +164,13 @@ defmodule Eden.Lexer do
     token = token(:float, state.current.value)
     start_token(state, :exponent, token, <<char :: utf8>>, rest)
   end
+  defp _tokenize(state = %{state: s}, <<"/" :: utf8, rest :: binary>>) do
+    if not String.contains?(state.current.value, "/") do
+      consume_char(state, <<"/" :: utf8>>, rest)
+    else
+      raise Ex.UnexpectedInputError, "/"
+    end
+  end
   defp _tokenize(state = %{state: s}, <<char :: utf8, rest :: binary>> = input)
   when s in [:number, :exponent, :fraction] do
     cond do

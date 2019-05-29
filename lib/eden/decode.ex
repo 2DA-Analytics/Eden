@@ -34,7 +34,7 @@ defmodule Eden.Decode do
     String.to_atom(value)
   end
   def decode(%Node{type: :integer, value: value}, _opts) do
-    String.to_integer(String.trim_trailing(Integer.to_string(value), ?N))
+    String.trim_trailing(Integer.to_string(value), ?N)
   end
   def decode(%Node{type: :float, value: value}, _opts) do
     value = String.trim_trailing(Float.to_string(value), ?M)
