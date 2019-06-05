@@ -33,11 +33,11 @@ defmodule Eden.Decode do
   def decode(%Node{type: :keyword, value: value}, _opts) do
     String.to_atom(value)
   end
-  def decode(%Node{type: :integer, value: value}, _opts) do
-    String.trim_trailing(Integer.to_string(value), ?N)
+  def decode(%Node{type: :list, children: children}, opts) do
+    decode(children, opts)
   end
   def decode(%Node{type: :float, value: value}, _opts) do
-    value = String.trim_trailing(Float.to_string(value), ?M)
+    value = String.rstrip(value, ?M)
     # Elixir/Erlang don't convert to float if there
     # is no decimal part.
     final_value = if not String.contains?(value, ".") do
@@ -49,10 +49,11 @@ defmodule Eden.Decode do
     else
       value
     end
-    String.to_float(final_value)
+    :erlang.binary_to_float(final_value)
   end
-  def decode(%Node{type: :list, children: children}, opts) do
-    decode(children, opts)
+  def decode(%Node{type: :integer, value: value}, _opts) do
+    value = String.rstrip(value, ?N)
+    :erlang.binary_to_integer(value)
   end
   def decode(%Node{type: :vector, children: children}, opts) do
     children
@@ -72,7 +73,7 @@ defmodule Eden.Decode do
   def decode(%Node{type: :set, children: children}, opts) do
     children
     |> decode(opts)
-    |> Enum.into(MapSet.new)
+    |> Enum.into(HashSet.new)
   end
   def decode(%Node{type: :tag, value: name, children: [child]}, opts) do
     case Map.get(opts[:handlers], name) do
