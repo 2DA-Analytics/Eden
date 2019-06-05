@@ -38,6 +38,7 @@ defmodule EdenTest do
     assert decode!("42N") == 42
 
     assert decode!("42.0") == 42.0
+    assert decode!("294/7") == 42.0
     assert decode!("42M") == 42.0
     assert decode!("42.0e3") == 42000.0
     assert decode!("42e-3") == 0.042

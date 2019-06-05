@@ -53,7 +53,14 @@ defmodule Eden.Decode do
   end
   def decode(%Node{type: :integer, value: value}, _opts) do
     value = String.rstrip(value, ?N)
-    :erlang.binary_to_integer(value)
+    fraction_regex = ~r/\d+\/\d+/
+
+    if (Regex.match?(fraction_regex, value)) do
+      [numerator, denominator] = String.split(value, "/")
+      :erlang.binary_to_integer(numerator) / :erlang.binary_to_integer(denominator)
+    else
+      :erlang.binary_to_integer(value)
+    end
   end
   def decode(%Node{type: :vector, children: children}, opts) do
     children
