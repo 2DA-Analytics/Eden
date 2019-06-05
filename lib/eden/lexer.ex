@@ -18,7 +18,7 @@ defmodule Eden.Lexer do
 
   Options:
 
-  - `:location` - a `boolean` that determines wether the location information
+  - `:location` - a `boolean` that determines whether the location information
      should be included with each token. Lines are one-based and columns are
      zero-based. The default value for `:location` is `false`.
 
